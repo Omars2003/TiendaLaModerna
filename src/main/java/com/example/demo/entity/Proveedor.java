@@ -14,7 +14,7 @@ public class Proveedor {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "proveedor_seq")
     @SequenceGenerator(name = "proveedor_seq", sequenceName = "proveedor_seq", allocationSize = 1)
-    @JsonIgnore
+   
     private Long id;
 
     @Column(name = "NOMBRE", nullable = false, length = 100)

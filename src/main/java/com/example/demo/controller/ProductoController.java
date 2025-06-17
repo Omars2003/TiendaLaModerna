@@ -2,9 +2,13 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.ProductoRequestDTO;
 import com.example.demo.entity.Producto;
+import com.example.demo.entity.ProductoPorCaducar;
+import com.example.demo.entity.ProductoStockBajo;
 import com.example.demo.entity.Proveedor;
 import com.example.demo.repository.ProveedorRepository;
+import com.example.demo.repository.ProductoPorCaducarRepository;
 import com.example.demo.repository.ProductoRepository;
+import com.example.demo.repository.ProductoStockBajoRepository;
 import com.example.demo.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,15 +29,28 @@ public class ProductoController {
     @Autowired
     private ProductoRepository productoRepository;
 
+     @Autowired
+    private ProductoStockBajoRepository stockBajoRepo;
+
+    @Autowired
+    private ProductoPorCaducarRepository porCaducarRepo;
+
     @GetMapping
     public List<Producto> obtenerTodos() {
         return service.obtenerTodos();
     }
 
-    @GetMapping("/bajo-stock")
-    public List<Producto> bajoStock() {
-        return service.bajoStock();
+      @GetMapping("/stock-bajo")
+    public List<ProductoStockBajo> obtenerStockBajo() {
+        return stockBajoRepo.findAll();
     }
+
+    @GetMapping("/por-caducar")
+    public List<ProductoPorCaducar> obtenerPorCaducar() {
+        return porCaducarRepo.findAll();
+    }
+
+    
 
     // Nuevo método usando DTO
     @PostMapping
